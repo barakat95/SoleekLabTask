@@ -3,6 +3,7 @@ package com.example.barakat.soleeklab.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -23,6 +24,7 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
     FirebaseUser firebaseUser;
     EditText edtTxtEmail;
     EditText edtTxtPassword;
+    EditText edtTxtPasswordConfirmation;
     Button btnRegister;
     Button btnLogin;
 
@@ -42,6 +44,7 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
 //        Find Regester Screen views by Ids
         edtTxtEmail = findViewById(R.id.register_email);
         edtTxtPassword = findViewById(R.id.register_password);
+        edtTxtPasswordConfirmation = findViewById(R.id.register_confirm_password);
 
         btnRegister = findViewById(R.id.btn_register_register_screen);
         btnRegister.setOnClickListener(this);
@@ -55,6 +58,16 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
 //        getting text from edit text fields
         String email = edtTxtEmail.getText().toString().trim();
         String password = edtTxtPassword.getText().toString().trim();
+        String passwordConfirmation = edtTxtPasswordConfirmation.getText().toString().trim();
+
+        if (password.length() < 6) {
+            Toast.makeText(this, "Your password must have at least 6 characters", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!passwordConfirmation.equals(password)) {
+            Toast.makeText(this, "Both password fields must be identic", Toast.LENGTH_SHORT).show();
+            return;
+        }
 //        check if the edit text is empty
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show();
@@ -73,7 +86,7 @@ public class RegistrationScreen extends AppCompatActivity implements View.OnClic
                     startActivity(new Intent(RegistrationScreen.this, MainActivity.class));
                     finish();
                 } else {
-                    Toast.makeText(RegistrationScreen.this, "Error, password must be at least 6 characters, please try again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationScreen.this, "Error, Invalid Email or Password please try again", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
