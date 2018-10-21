@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
+    private int mLoadedItems = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 //      Setting Recycler View and the layout manager
         final RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 //        Getting the response from API
         ApiInterface apiServices = ApiClient.getClient().create(ApiInterface.class);
         Call<List<Countries>> call = apiServices.getAllCountries();

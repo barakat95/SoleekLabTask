@@ -18,6 +18,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.Coun
     int rawLayout;
     List<Countries> countries;
 
+
     public CountriesAdapter(Context context, int rawLayout, List<Countries> responseList) {
         this.context = context;
         this.rawLayout = rawLayout;
